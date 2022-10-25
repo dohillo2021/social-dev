@@ -1,0 +1,6 @@
+{
+  "presets":["next/babel"],
+  "pluguins":[
+    ["styled-components", {"ssr": true}]
+  ]
+}
