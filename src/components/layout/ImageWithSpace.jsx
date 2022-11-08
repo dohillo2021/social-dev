@@ -22,7 +22,7 @@ height: 100vh;
 
 
 const StyledContainer =  styled.div`
-  background-color: white;
+  background-color: ${props => props.theme.white};
   padding: 30px 50px;;
 
   @media (min-width: ${WIDTH_BREAK}) {
@@ -34,7 +34,16 @@ const StyledContainer =  styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+ 
+
+  height: calc(100vh - 60px);
+  overflow: auto;
+
+  &:before, &:after {
+    content: '';
+    margin: auto;
+  }
+
 
 `
 
