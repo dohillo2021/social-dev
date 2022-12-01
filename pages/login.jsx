@@ -35,7 +35,7 @@ function LoginPage ( ) {
           <Input Label="Senha" type="password" />
           <Button>Entrar</Button>
         </Form>
-        <text>Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link></text>
+        <Text>Não possui uma conta? <Link href="/signup">Faça seu cadastro</Link></Text>
       </FormContainer>
     </ImageWithSpace>
   )

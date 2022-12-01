@@ -5,7 +5,7 @@ const WIDTH_BREAK = '700px'
 const StyledFlex = styled.div`
   display: flex;
 `
-const StyledImage = styled.div `
+const StyledImage = styled.div`
 background-image: url('${props => props.image}');
 background-position: right;
 background-repeat: no-repeat;
@@ -26,7 +26,7 @@ const StyledContainer =  styled.div`
   padding: 30px 50px;;
 
   @media (min-width: ${WIDTH_BREAK}) {
-    width:calc ( ${WIDTH_BREAK} - 100px);
+    width:calc(${WIDTH_BREAK} - 100px);
   }
   @media (max-width: ${WIDTH_BREAK}) {
     width: 100%;
