@@ -37,7 +37,7 @@ const StyledContainer =  styled.div`
  
 
   height: calc(100vh - 60px);
-  overflow: auto;
+  overflow-y: auto;
 
   &:before, &:after {
     content: '';
