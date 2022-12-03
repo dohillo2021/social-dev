@@ -6,6 +6,10 @@ por setar o tamanho máximo*/
 const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
+
+  @medi(max-width: 700px) {
+    padding: 10px;
+  }
 `
 
 const StyledChildren = styled.div`
