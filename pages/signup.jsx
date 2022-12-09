@@ -1,65 +1,76 @@
-import { useState } from 'react'
-
-import styled from 'styled-components'
-import Link from 'next/link'
-
-import{ useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+import Link from 'next/link';
 import { joiResolver } from '@hookform/resolvers/joi'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
-import { signupSchema } from '../modules/user/user.schema'
+import ImageWithSpace from '../src/components/layout/ImageWIthSpace';
+import H1 from '../src/components/tipographfy/H1';
+import H4 from '../src/components/tipographfy/H4';
+import H2 from '../src/components/tipographfy/H2';
+import Button from '../src/components/inputs/Button';
+import Input from '../src/components/inputs/Input';
+import { signupSchema } from '../modules/user/user.schema';
+import { object } from 'joi';
 
-
-import ImageWithSpace from '../src/components/layout/ImageWithSpace'
-import H1 from '../src/components/typography/H1'
-import H2 from '../src/components/typography/H2'
-import H4 from '../src/components/typography/H4'
-import Button from '../src/components/inputs/Button'
-import Input from '../src/components/inputs/Input'
-
-
-const FormContainer = styled.div `
-  margin-top: 60px;
+const FormContainer = styled.div`
+  margin-top: 40px;
 `
-const Form = styled.form `
-  display:flex;
+
+const Form = styled.form`
+  display: flex;
   flex-direction: column;
   margin: 20px 0;
   gap: 20px;
 `
-
 const Text = styled.p`
   text-align: center;
 `
 
-function SignupPage ( ) {
-  const { register, handleSubmit, formState: { errors } } = useForm ({
+function SignupPage () {
+  const router = useRouter()
+  const { control, handleSubmit, formState: { errors }, setError } = useForm({
     resolver: joiResolver(signupSchema)
   })
 
-  const handleForm = (data) => {
-    console.log(data)  
+  const handleForm = async (data) => {
+    try {
+      const { status } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/user/signup`, data)
+      if (status === 201) {
+        router.push('/')
+      }
+    } catch (error) {
+      console.log(error.response.data)
+      if (error.response.data.code === 11000){
+        setError(error.response.data.duplicatedKey, {
+          type: 'duplicated'
+        })
+      }
+    }
   }
 
-  console.log(errors)
-
-  return (
+  return(
     <ImageWithSpace>
       <H1># Social Dev</H1>
       <H4>Tudo que acontece no mundo dev, está aqui!</H4>
+      
       <FormContainer>
-        <H2>Crie sua conta</H2>
+        <H2>Crie sua conta!</H2>
         <Form onSubmit={handleSubmit(handleForm)}>
-          <Input Label="Nome" { ...register('firstName')}/>
-          <Input Label="Sobrenome" { ...register('lastName')}/>
-          <Input Label="Usuário" { ...register('user')}/>
-          <Input Label="Email" { ...register('email')}/>
-          <Input Label="Senha" { ...register('password')}/>
-          <Button type="submit">Cadastrar</Button>
+          <Input label="Nome" name="firstName" control={control} />
+          <Input label="Sobrenome" name="lastName" control={control} />
+          <Input label="User" name="user" control={control} />
+          <Input label="Digite seu email" type="email" name="email" control={control} />
+          <Input label="Sua senha" type="password" name="password" control={control} />
+          <Button type={'submit'} disabled={Object.keys(errors).length > 0}>Cadastrar</Button>
         </Form>
-        <text>já possui uma conta? <Link href="/login">Faça seu login</Link></text>
       </FormContainer>
+      <Text>
+        Já possui uma conta? <Link href='/login'>Faça seu login!</Link>
+      </Text>
     </ImageWithSpace>
   )
 }
 
-export default SignupPage
+export default SignupPage;
