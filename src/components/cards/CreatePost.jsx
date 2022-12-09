@@ -54,7 +54,7 @@ function CreatePost ({ user }) {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/post`, data)
 
     if(response.status === 201){
-      //reseta o form e faz uma nova busca dos posts
+      //reseta o form e faz uma nova busca dos posts o SWR faz isso através da função useSWRConfig() e mutate
       reset();
       mutate(`${process.env.NEXT_PUBLIC_API_URL}api/post`);
     }
