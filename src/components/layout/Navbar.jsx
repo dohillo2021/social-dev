@@ -1,39 +1,44 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
-/*Eu poderia colocar justify-content: space-between no StyledNavbar, 
-ao invés de flex: 1 no StyledLogo?*/
-
-const StyledNavbar = styled.div `
+const StyledNavbar = styled.div`
   background-color: ${props => props.theme.white};
   height: 80px;
   display: flex;
   align-items: center;
   padding: 0 100px;
 
-  @media(max-width: 500px) {
+  @media (max-width: 500px){
     padding: 0 20px;
   }
-  
 `
 
 const StyledLogo = styled.span`
-  flex: 1;
+  flex: 1; //faz o elemento ocupar todo o espaço em branco do flex, deixando apenas o espaço dos demais componentes
   font-weight: bold;
   font-size: 20px;
 `
+const StyledLogout = styled.a`
+  cursor: pointer;
+`
 
+function Navbar () {
+  const router = useRouter();
 
-
-function Navbar() {
-  return (
+  const handleLogout = async () => {
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/user/logout`);
+    router.push('/login');
+  }
+  
+  return(
     <StyledNavbar>
-      <StyledLogo> # Social Dev</StyledLogo>
+      <StyledLogo>#Social Dev</StyledLogo>
       <div>
-          <a href="#">Desconectar</a>
+        <StyledLogout onClick={handleLogout}>Desconectar</StyledLogout>
       </div>
     </StyledNavbar>
-  )    
-
+  )
 }
 
-export default Navbar
+export default Navbar;

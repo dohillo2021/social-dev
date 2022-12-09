@@ -1,15 +1,8 @@
-import styled from 'styled-components'
-
-/* StyledContainer é responsável por alinhar as coisas no centro e StyledChildren responsável 
-por setar o tamanho máximo*/
+import styled from 'styled-components';
 
 const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
-
-  @medi(max-width: 700px) {
-    padding: 10px;
-  }
 `
 
 const StyledChildren = styled.div`
@@ -17,10 +10,8 @@ const StyledChildren = styled.div`
   width: 100%;
 `
 
-
-
-function Container ({ children }) {
-  return (
+function Container ({children}) {
+  return(
     <StyledContainer>
       <StyledChildren>
         {children}
@@ -29,4 +20,4 @@ function Container ({ children }) {
   )
 }
 
-export default Container
+export default Container;

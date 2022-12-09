@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Button = styled.button`
   background-color: ${props => props.theme.primary};
@@ -10,11 +10,15 @@ const Button = styled.button`
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
-  
-  :hover {
+
+  :hover{
     background-color: ${props => props.theme.primaryHover};
   }
 
+  :disabled{
+    background-color: ${props => props.theme.disable};
+    cursor: no-drop;
+  }
 `
 
-export default Button
+export default Button;

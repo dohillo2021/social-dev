@@ -1,11 +1,14 @@
+
 const theme = {
   primary: '#8933CD',
   primaryHover: '#7029A8',
-  inputBackground: 'F5F5F5',
-  inputBorder:'#E6E6E6',
-  background: '#ECECEC',
+  inputBackground: '#F5F5F5',
+  inputBorder: '#E6E6E6',
+  background: '#E8E8E8',
   black: '#3A3A3A',
-  white: '#FFFFFF',
+  white: '#FFF',
+  error: 'red',
+  disable: 'gray'
 }
 
 export default theme
