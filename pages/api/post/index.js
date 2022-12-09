@@ -27,7 +27,7 @@ handler
       if(!req.session.user) return res.status(401).send();
 
       const posts = await getPosts();
-      res.status(201).send(posts);
+      res.status(200).send(posts);
     } catch (error) {
       return res.status(500).send(error.message);
     }
