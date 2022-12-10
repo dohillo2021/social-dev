@@ -6,8 +6,8 @@ import useSWR from 'swr';
 
 import { ironConfig } from '../lib/middleware/ironSession';
 
-import Navbar from "../src/components/layout/navbar";
-import Container from '../src/components/layout/container';
+import Navbar from "../src/components/layout/Navbar";
+import Container from '../src/components/layout/Container';
 import CreatePost from '../src/components/cards/CreatePost';
 import Post from '../src/components/cards/Post';
 import H3 from '../src/components/tipographfy/H3';
