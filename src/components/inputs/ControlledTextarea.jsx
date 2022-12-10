@@ -2,7 +2,7 @@ import { useController } from "react-hook-form";
 
 import Textarea from "./Textarea";
 
-export const ControlledTextarea = ({ name, control, defaultValue = '', ...props }) => {
+ const ControlledTextarea = ({ name, control, defaultValue = '', ...props }) => {
 
   const {
     field: { value, onChange }
@@ -12,3 +12,5 @@ export const ControlledTextarea = ({ name, control, defaultValue = '', ...props 
     <Textarea value={value} onChange={onChange} {...props} />
   )
 }
+
+export default ControlledTextarea

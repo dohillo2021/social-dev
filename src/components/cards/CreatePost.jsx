@@ -1,13 +1,13 @@
-import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
-import { joiResolver } from '@hookform/resolvers/joi';
-import axios from 'axios';
-import { useSWRConfig } from 'swr';
+import styled from 'styled-components'
+import { useForm } from 'react-hook-form'
+import { joiResolver } from '@hookform/resolvers/joi'
+import axios from 'axios'
+import { useSWRConfig } from 'swr'
 
-import { createPostSchema } from '../../../modules/post/post.schema';
+import { createPostSchema } from '../../../modules/post/post.schema'
 
-import H4 from '../tipographfy/H4';
-import { ControlledTextarea } from '../inputs/ControlledTextarea';
+import H4 from '../tipographfy/H4'
+import ControlledTextarea from '../inputs/ControlledTextarea'
 import Button from '../inputs/Button'
 
 const PostContainer = styled.div`
@@ -67,7 +67,7 @@ function CreatePost ({ user }) {
         <TextContainer>
           <ControlledTextarea 
             placeholder='Digite sua mensagem!' 
-            rols="4" 
+            rows="4" 
             name='text' 
             control={control} 
             maxLength='256' 

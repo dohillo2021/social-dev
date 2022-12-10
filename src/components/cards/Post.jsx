@@ -1,9 +1,13 @@
+import { useState } from 'react'
+
 import styled from 'styled-components'
 import moment from 'moment/moment'
 import axios from 'axios'
 import { useSWRConfig } from 'swr'
 
 import  Menu from '../navigation/Menu'
+
+import EditPost from './EditPost'
 
 const PostContainer = styled.div`
   background-color: ${props => props.theme.white};
@@ -28,8 +32,15 @@ const ContainerMenu = styled.div`
 
 function Post ({ date, user, text, isOwner, id }) {
   const { mutate } = useSWRConfig()
-  const handleEdit = () => {
-    console.log("EDITAR PUBLICADO")
+  const [editPost, setEditPost] = useState(false) //variavel editPost e a função setEditPost responsável por saber se estamos no modo edição de post ou se a gente tá no modo padrão
+
+  const handleEdit = async () => {
+    setEditPost(true)
+  }
+
+  const handleSaveEdit = () => {
+    setEditPost(false)
+    mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
   }
 
   const handleDelete = async () => {
@@ -40,7 +51,7 @@ function Post ({ date, user, text, isOwner, id }) {
         }
       })
       if (response.status === 200)
-        mutate(`${process.env.NEXT-PUBLIC_API_URL}/api/post`)
+        mutate(`${process.env.NEXT_PUBLIC_API_URL}/api/post`)
     }catch (err) {
       console.log(err)
     }
@@ -71,7 +82,10 @@ function Post ({ date, user, text, isOwner, id }) {
       
       <StyledUsername>@{user}</StyledUsername>
       <StyledDate>{moment(date).format('LLL')}</StyledDate>
-      <ContainerText>{text}</ContainerText>
+      <ContainerText>
+        {!editPost && text}
+        {editPost && <EditPost id={id} text={text} onSave={handleSaveEdit} />}
+      </ContainerText>
     </PostContainer>
   )
 }
