@@ -13,9 +13,9 @@ const StyledNavbar = styled.div`
     padding: 0 20px;
   }
 `
-
+//flex:1; - faz o elemento ocupar todo o espaço em branco do flex, deixando apenas o espaço dos demais componentes
 const StyledLogo = styled.span`
-  flex: 1; //faz o elemento ocupar todo o espaço em branco do flex, deixando apenas o espaço dos demais componentes
+  flex: 1; 
   font-weight: bold;
   font-size: 20px;
 `
