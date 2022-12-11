@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { joiResolver } from '@hookform/resolvers/joi'
@@ -50,14 +51,24 @@ function CreatePost ({ user }) {
     mode: 'all'
   });
   
+  const [loading, setLoading] = useState(false);
+  
   const onSubmit = async (data) => {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/post`, data)
-
-    if(response.status === 201){
-      //reseta o form e faz uma nova busca dos posts o SWR faz isso através da função useSWRConfig() e mutate
-      reset();
-      mutate(`${process.env.NEXT_PUBLIC_API_URL}api/post`);
-    }
+    try{
+        setLoading(true);
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}api/post`, data)
+      
+        if(response.status === 201){
+          //reseta o form e faz uma nova busca dos posts o SWR faz isso através da função useSWRConfig() e mutate
+          reset();
+          mutate(`${process.env.NEXT_PUBLIC_API_URL}api/post`);
+      }
+      
+    } catch (err) {
+      console.error(err)
+    } finally {
+        setLoading(false);
+    }  
   }
 
   return(
@@ -75,7 +86,7 @@ function CreatePost ({ user }) {
         </TextContainer>
         <BottomContainer>
           <BottomText>Sua mensagem será pública!</BottomText>
-          <Button disabled={!isValid}>Enviar mensagem</Button>
+          <Button loading={loading} disabled={!isValid}>Enviar mensagem</Button>
         </BottomContainer>
       </form>
     </PostContainer>

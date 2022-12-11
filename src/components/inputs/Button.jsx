@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
+const StyledButton = styled.button`
   background-color: ${props => props.theme.primary};
   padding: 15px 20px;
   border-radius: 10px;
@@ -21,4 +21,15 @@ const Button = styled.button`
   }
 `
 
-export default Button;
+
+const Button = ({ children, Loading, disabled, ...props }) => {
+  return (
+  <StyledButton
+    disabled={disabled || Loading}
+    {...props}
+  >
+    {Loading && <img src="./loading.svg" width="14px" /> }
+    {!Loading && children}
+  </StyledButton>)
+}
+export default Button
